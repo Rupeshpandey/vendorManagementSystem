@@ -1,0 +1,28 @@
+<div class="vendor-registration-container">
+  <div class="header d-flex justify-content-between align-items-center">
+    <h1>Vendor Registration</h1>
+    <button mat-icon-button (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </div>
+  <div class="content mt-4">
+    <mat-tab-group #tabGroup (selectedTabChange)="onTabChange($event)" backgroundColor="primary">
+      <mat-tab label="Basic Details Form">
+        <app-basic-details (formValid)="onFormValid('vendor', $event)"></app-basic-details>
+      </mat-tab>
+      <mat-tab label="Company Contact">
+        <app-company-contact (formValid)="onFormValid('companyContact', $event)"></app-company-contact>
+      </mat-tab>
+      <mat-tab label="Banking Information">
+        <app-banking-information (formValid)="onFormValid('bankingInformation', $event)"></app-banking-information>
+      </mat-tab>
+    </mat-tab-group>
+  
+    <div class="text-center mt-4">
+      <button mat-raised-button color="primary" (click)="submitForm()"
+        [disabled]="!isTabValid['vendor'] || !isTabValid['companyContact']">
+        Submit
+      </button>
+    </div>
+  </div>
+</div>
