@@ -118,27 +118,34 @@ export class BasicDetailsComponent {
     }
   }
 
+  // resetForm() {
+  //   this.vendor = {
+  //     vendorID: 1,
+  //     firstName: '',
+  //     middleName: '',
+  //     lastName: '',
+  //     gender: '',
+  //     mobile: '',
+  //     dob: '',
+  //     panCard: '',
+  //     profileImage: '',
+  //     languagePreference: {
+  //       hindi: false,
+  //       english: false
+  //     },
+  //     district: '',
+  //     block: '',
+  //     createdAt: new Date(),
+  //     updatedAt: new Date(),
+  //   };
+  //   this.basicForm.resetForm(this.vendor);
+  //   this.formValid.emit({ valid: false, data: this.vendor });
+  // }
+
   resetForm() {
-    this.vendor = {
-      vendorID: 1,
-      firstName: '',
-      middleName: '',
-      lastName: '',
-      gender: '',
-      mobile: '',
-      dob: '',
-      panCard: '',
-      profileImage: '',
-      languagePreference: {
-        hindi: false,
-        english: false
-      },
-      district: '',
-      block: '',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    this.basicForm.resetForm(this.vendor);
-    this.formValid.emit({ valid: false, data: this.vendor });
+    if (this.basicForm) {
+      this.basicForm.resetForm();
+    }
   }
+  
 }

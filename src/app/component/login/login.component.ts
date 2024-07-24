@@ -14,11 +14,20 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onLogin() {
-    this.authService.login(this.username, this.password).subscribe(success => {
-      if (success) {
-        this.router.navigate(['/vendor-registration']);
-      } else {
-        alert('Invalid credentials');
+    console.log(this.username, this.password);
+    this.authService.login(this.username, this.password).subscribe({
+      next: (success: boolean) => {
+        console.log('Login success:', success);
+        if (success) {
+          console.log('Navigating to /vendor-registration');
+          this.router.navigate(['/vendor-registration']);
+        } else {
+          alert('Invalid credentials');
+        }
+      },
+      error: (err: any) => {
+        console.error('Login error', err);
+        alert('An error occurred during login. Please try again later.');
       }
     });
   }

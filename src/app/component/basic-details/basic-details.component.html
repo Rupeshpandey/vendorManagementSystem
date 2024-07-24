@@ -62,14 +62,14 @@
     <div class="row mb-3">
       <div class="col-md-4">
         <mat-label>Language Preference</mat-label>
-        <mat-checkbox [(ngModel)]="vendor.languagePreference.hindi" [ngModelOptions]="{standalone: true}">Hindi</mat-checkbox>
-        <mat-checkbox [(ngModel)]="vendor.languagePreference.english" [ngModelOptions]="{standalone: true}">English</mat-checkbox>
+        <mat-checkbox name="hindi" [(ngModel)]="vendor.languagePreference.hindi" [ngModelOptions]="{standalone: true}">Hindi</mat-checkbox>
+        <mat-checkbox name="english" [(ngModel)]="vendor.languagePreference.english" [ngModelOptions]="{standalone: true}">English</mat-checkbox>
       </div>
       <div class="col-md-4">
         <mat-form-field class="w-100">
           <label class="w-100">District</label>
           <mat-select name="district" #district="ngModel" [(ngModel)]="vendor.district" required (selectionChange)="onDistrictChange()">
-            <mat-option *ngFor="let district of districts; let i = index" [value]="i">
+            <mat-option *ngFor="let district of districts; let i = index" [value]="i+1">
               {{ district }}
             </mat-option>
           </mat-select>

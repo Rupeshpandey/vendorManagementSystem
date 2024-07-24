@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class BankingInformationComponent {
 
   @Output() formValid = new EventEmitter<{ valid: boolean; data: any }>();
-  @ViewChild('bankingInformationForm') bankingInformationForm!: NgForm;
+  @ViewChild('bankingInformationForm') bankingForm!: NgForm;
   @Input() parentComponent: any;
 
   bankingInformation = {
@@ -22,7 +22,6 @@ export class BankingInformationComponent {
     createdAt: new Date(),
     updatedAt: new Date(),
   };
-  bankingForm: any;
 
   constructor(private router: Router) {}
 
@@ -31,7 +30,7 @@ export class BankingInformationComponent {
   }
 
   checkFormValidity() {
-    this.formValid.emit({ valid: this.bankingInformationForm?.valid ?? false, data: this.bankingInformation });
+    this.formValid.emit({ valid: this.bankingForm?.valid ?? false, data: this.bankingInformation });
   }
 
   onFormChange(isValid: boolean) {
@@ -47,20 +46,27 @@ export class BankingInformationComponent {
       this.formValid.emit({ valid: true, data: this.bankingInformation });
     }
   }
+  // resetForm() {
+  //   debugger;
+  //   this.bankingInformation = {
+  //     vendorID: 0,
+  //     bankName: '',
+  //     IFSCCode: '',
+  //     accountNumber: '',
+  //     Branch:'',
+  //     createdAt: new Date(),
+  //     updatedAt: new Date(),
+  //   };
+  //   this.bankingInformationForm.resetForm(this.bankingInformation);
+  //   this.formValid.emit({ valid: false, data: this.bankingInformation });
+  // }
+
   resetForm() {
-    debugger;
-    this.bankingInformation = {
-      vendorID: 0,
-      bankName: '',
-      IFSCCode: '',
-      accountNumber: '',
-      Branch:'',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    this.bankingInformationForm.resetForm(this.bankingInformation);
-    this.formValid.emit({ valid: false, data: this.bankingInformation });
+    if (this.bankingForm) {
+      this.bankingForm.resetForm();
+    }
   }
+  
 
   
 

@@ -55,27 +55,34 @@ export class CompanyContactComponent {
     }
   }
 
+  // resetForm() {
+  //   debugger;
+  //   this.companyContact = {
+  //     vendorID: 0,
+  //     companyName: '',
+  //     telephone: '',
+  //     fax: '',
+  //     email: '',
+  //     pointOfContactName: '',
+  //     title: '',
+  //     contactPhone1: '',
+  //     mailingAddress: '',
+  //     website: '',
+  //     contactEmail: '',
+  //     contactPhone2: '',
+  //     createdAt: new Date(),
+  //     updatedAt: new Date(),
+  //   };
+  //   this.companyForm.resetForm(this.companyContact);
+  //   this.formValid.emit({ valid: false, data: this.companyContact });
+  // }
+
   resetForm() {
-    debugger;
-    this.companyContact = {
-      vendorID: 0,
-      companyName: '',
-      telephone: '',
-      fax: '',
-      email: '',
-      pointOfContactName: '',
-      title: '',
-      contactPhone1: '',
-      mailingAddress: '',
-      website: '',
-      contactEmail: '',
-      contactPhone2: '',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    this.companyForm.resetForm(this.companyContact);
-    this.formValid.emit({ valid: false, data: this.companyContact });
+    if (this.companyForm) {
+      this.companyForm.resetForm();
+    }
   }
+  
 
   
 

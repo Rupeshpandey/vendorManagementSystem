@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule } from '@angular/forms';
 import { BankingInformationComponent } from './banking-information.component';
 
 describe('BankingInformationComponent', () => {
@@ -8,7 +8,8 @@ describe('BankingInformationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BankingInformationComponent ]
+      declarations: [ BankingInformationComponent ],
+      imports: [ FormsModule ]
     })
     .compileComponents();
 
