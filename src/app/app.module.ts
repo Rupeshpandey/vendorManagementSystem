@@ -13,7 +13,7 @@ import { VendorListComponent } from './component/vendor-list/vendor-list.compone
 import { BasicDetailsComponent } from './component/basic-details/basic-details.component';
 import { CompanyContactComponent } from './component/company-contact/company-contact.component';
 import { BankingInformationComponent } from './component/banking-information/banking-information.component';
-import { LoginComponent } from './component/login/login.component'; // Import HttpClientModule
+import { LoginComponent } from './component/login/login.component';
 
 
 @NgModule({
@@ -24,7 +24,8 @@ import { LoginComponent } from './component/login/login.component'; // Import Ht
     BasicDetailsComponent,
     CompanyContactComponent,
     BankingInformationComponent,
-    LoginComponent,
+    LoginComponent
+
     
   ],
   imports: [

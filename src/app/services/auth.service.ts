@@ -12,13 +12,18 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  isAuthenticated(): Observable<boolean> {
+    const token = localStorage.getItem(this.TOKEN_KEY);
+    return of(!!token); // Returns true if token exists, false otherwise
+  }
+
   login(username: string, password: string): Observable<boolean> {
     return this.http.post<any>(`${this.apiUrl}/login`, { username, passwordHash: password }).pipe(
       map(response => {
         console.log('API response:', response);
         if (response.message === 'Login successful') {
-          // Simulate token storage, replace 'dummy-token' with actual token if returned
-          localStorage.setItem(this.TOKEN_KEY, 'dummy-token');
+          // Replace 'dummy-token' with actual token if returned
+          localStorage.setItem(this.TOKEN_KEY, response.token || 'dummy-token');
           return true;
         }
         return false;
@@ -31,12 +36,12 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    // Check if token exists in local storage
     return !!localStorage.getItem(this.TOKEN_KEY);
   }
 
-  logout(): void {
-    // Remove token from local storage on logout
+  logout(): Observable<void> {
     localStorage.removeItem(this.TOKEN_KEY);
+    console.log('User logged out');
+    return of();
   }
 }

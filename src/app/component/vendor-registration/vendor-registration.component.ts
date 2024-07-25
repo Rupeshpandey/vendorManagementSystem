@@ -162,7 +162,5 @@ export class VendorRegistrationComponent implements OnInit {
     }
   }
 
-  logout() {
-    this.router.navigate(['/login']);
-  }
+  
 }

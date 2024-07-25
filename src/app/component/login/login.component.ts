@@ -14,13 +14,17 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onLogin() {
-    console.log(this.username, this.password);
+    console.log('Attempting login with:', this.username, this.password);
     this.authService.login(this.username, this.password).subscribe({
       next: (success: boolean) => {
         console.log('Login success:', success);
         if (success) {
           console.log('Navigating to /vendor-registration');
-          this.router.navigate(['/vendor-registration']);
+          this.router.navigate(['/vendor-registration']).then(success => {
+            console.log('Navigation success:', success);
+          }).catch(err => {
+            console.error('Navigation error:', err);
+          });
         } else {
           alert('Invalid credentials');
         }
