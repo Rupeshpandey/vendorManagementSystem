@@ -166,5 +166,9 @@ export class VendorRegistrationComponent implements OnInit {
     }
   }
 
+  vendorlist() {
+    this.router.navigate(['/vendor-list']);
+  }
+
   
 }

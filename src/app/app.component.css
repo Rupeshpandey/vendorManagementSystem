@@ -10,7 +10,7 @@
   align-items: center;
   background-color: #1976d2;
   color: white;
-  padding: 10px 20px;
+  padding: 1px;
 }
 
 .header-left {
@@ -29,12 +29,12 @@
 
 .app-main {
   flex: 1;
-  padding: 20px;
+  padding: 5px;
 }
 
 .app-footer {
   background-color: #1976d2;
   color: white;
   text-align: center;
-  padding: 10px;
+  padding: 1px;
 }
