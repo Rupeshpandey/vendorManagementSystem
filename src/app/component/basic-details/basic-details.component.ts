@@ -143,9 +143,8 @@ export class BasicDetailsComponent {
   // }
 
   resetForm() {
-    if (this.basicForm) {
-      this.basicForm.resetForm();
+    this.basicForm.resetForm();
+    this.formValid.emit({ valid: false, data: this.vendor });
     }
-  }
   
 }

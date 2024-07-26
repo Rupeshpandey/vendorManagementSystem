@@ -27,6 +27,7 @@ export class VendorRegistrationComponent implements OnInit {
     companyContact: false,
     bankingInformation: false
   };
+  
 
   formData: VendorCompositeModel = this.initializeFormData();
 
@@ -83,17 +84,20 @@ export class VendorRegistrationComponent implements OnInit {
     if (this.basicDetailsComponent) this.basicDetailsComponent.resetForm();
     if (this.companyContactComponent) this.companyContactComponent.resetForm();
     if (this.bankingInformationComponent) this.bankingInformationComponent.resetForm();
+    
     this.resetFormData();
   }
 
   resetFormData() {
-    this.formData = this.initializeFormData();
+    
     this.isTabValid = {
       vendor: false,
       companyContact: false,
       bankingInformation: false
     };
     this.navigateToTab(0);
+    this.formData = this.initializeFormData();
+    
   }
 
   initializeFormData(): VendorCompositeModel {

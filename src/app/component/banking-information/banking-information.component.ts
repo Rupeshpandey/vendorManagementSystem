@@ -62,9 +62,9 @@ export class BankingInformationComponent {
   // }
 
   resetForm() {
-    if (this.bankingForm) {
       this.bankingForm.resetForm();
-    }
+      this.formValid.emit({ valid: false, data: this.bankingInformation });
+    
   }
   
 

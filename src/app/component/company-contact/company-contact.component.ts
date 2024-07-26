@@ -78,9 +78,9 @@ export class CompanyContactComponent {
   // }
 
   resetForm() {
-    if (this.companyForm) {
       this.companyForm.resetForm();
-    }
+      this.formValid.emit({ valid: false, data: this.companyContact });
+    
   }
   
 
