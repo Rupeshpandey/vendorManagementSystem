@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class BankingInformationComponent {
 
   @Output() formValid = new EventEmitter<{ valid: boolean; data: any }>();
-  @ViewChild('bankingInformationForm') bankingForm!: NgForm;
+  @ViewChild('bankingForm') bankingForm!: NgForm;
   @Input() parentComponent: any;
 
   bankingInformation = {

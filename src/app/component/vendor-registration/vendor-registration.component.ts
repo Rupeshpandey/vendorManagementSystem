@@ -3,10 +3,8 @@ import { MatTabGroup } from '@angular/material/tabs';
 import { VendorService } from 'src/app/services/vendor.service';
 import { VendorCompositeModel } from 'src/app/models/vendor-composite.model';
 import Swal from 'sweetalert2';
-import { BasicDetailsComponent } from '../basic-details/basic-details.component';
-import { CompanyContactComponent } from '../company-contact/company-contact.component';
-import { BankingInformationComponent } from '../banking-information/banking-information.component';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 type VendorCompositeModelKey = keyof VendorCompositeModel;
 
@@ -18,9 +16,9 @@ type VendorCompositeModelKey = keyof VendorCompositeModel;
 export class VendorRegistrationComponent implements OnInit {
 
   @ViewChild('tabGroup') tabGroup!: MatTabGroup;
-  @ViewChild('basicDetails') basicDetailsComponent!: BasicDetailsComponent;
-  @ViewChild('companyContact') companyContactComponent!: CompanyContactComponent;
-  @ViewChild('bankingInformation') bankingInformationComponent!: BankingInformationComponent;
+  @ViewChild('basicForm') basicForm!: NgForm;
+  @ViewChild('companyForm') companyForm!: NgForm;
+  @ViewChild('bankingForm') bankingForm!: NgForm;
 
   isTabValid: { [key in VendorCompositeModelKey]: boolean } = {
     vendor: false,
@@ -80,25 +78,47 @@ export class VendorRegistrationComponent implements OnInit {
     );
   }
 
-  resetAllForms() {
-    if (this.basicDetailsComponent) this.basicDetailsComponent.resetForm();
-    if (this.companyContactComponent) this.companyContactComponent.resetForm();
-    if (this.bankingInformationComponent) this.bankingInformationComponent.resetForm();
-    
-    this.resetFormData();
-  }
-
   resetFormData() {
-    
+    console.log('Before reset: ', this.formData);
+    this.formData = this.initializeFormData(); // Reset data model
+    console.log('After reset: ', this.formData);
     this.isTabValid = {
-      vendor: false,
-      companyContact: false,
-      bankingInformation: false
+        vendor: false,
+        companyContact: false,
+        bankingInformation: false
     };
     this.navigateToTab(0);
-    this.formData = this.initializeFormData();
-    
+}
+ngAfterViewInit() {
+  console.log('Basic form:', this.basicForm);
+  console.log('Company form:', this.companyForm);
+  console.log('Banking form:', this.bankingForm);
   }
+
+resetAllForms() {
+    debugger;
+    console.log('Resetting forms...');
+    console.log('Basic form:', this.basicForm);
+    console.log('Company form:', this.companyForm);
+    console.log('Banking form:', this.bankingForm);
+    if (this.basicForm) {
+        console.log('Basic form before reset:', this.basicForm);
+        this.basicForm.resetForm();
+        console.log('Basic form after reset:', this.basicForm);
+    }
+    if (this.companyForm) {
+        console.log('Company form before reset:', this.companyForm);
+        this.companyForm.resetForm();
+        console.log('Company form after reset:', this.companyForm);
+    }
+    if (this.bankingForm) {
+        console.log('Banking form before reset:', this.bankingForm);
+        this.bankingForm.resetForm();
+        console.log('Banking form after reset:', this.bankingForm);
+    }
+    
+    this.resetFormData();
+}
 
   initializeFormData(): VendorCompositeModel {
     return {
