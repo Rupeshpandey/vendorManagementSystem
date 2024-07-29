@@ -46,26 +46,26 @@ export class BankingInformationComponent {
       this.formValid.emit({ valid: true, data: this.bankingInformation });
     }
   }
-  // resetForm() {
-  //   debugger;
-  //   this.bankingInformation = {
-  //     vendorID: 0,
-  //     bankName: '',
-  //     IFSCCode: '',
-  //     accountNumber: '',
-  //     Branch:'',
-  //     createdAt: new Date(),
-  //     updatedAt: new Date(),
-  //   };
-  //   this.bankingInformationForm.resetForm(this.bankingInformation);
-  //   this.formValid.emit({ valid: false, data: this.bankingInformation });
-  // }
-
   resetForm() {
-      this.bankingForm.resetForm();
-      this.formValid.emit({ valid: false, data: this.bankingInformation });
-    
+    debugger;
+    this.bankingInformation = {
+      vendorID: 0,
+      bankName: '',
+      IFSCCode: '',
+      accountNumber: '',
+      Branch:'',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    this.bankingForm.resetForm(this.bankingInformation);
+    this.formValid.emit({ valid: false, data: this.bankingInformation });
   }
+
+  // resetForm() {
+  //     this.bankingForm.resetForm();
+  //     this.formValid.emit({ valid: false, data: this.bankingInformation });
+    
+  // }
   
 
   
