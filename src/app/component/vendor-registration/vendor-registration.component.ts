@@ -5,6 +5,9 @@ import { VendorCompositeModel } from 'src/app/models/vendor-composite.model';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { BasicDetailsComponent } from '../basic-details/basic-details.component';
+import { CompanyContactComponent } from '../company-contact/company-contact.component';
+import { BankingInformationComponent } from '../banking-information/banking-information.component';
 
 type VendorCompositeModelKey = keyof VendorCompositeModel;
 
@@ -16,9 +19,9 @@ type VendorCompositeModelKey = keyof VendorCompositeModel;
 export class VendorRegistrationComponent implements OnInit {
 
   @ViewChild('tabGroup') tabGroup!: MatTabGroup;
-  @ViewChild('basicForm') basicForm!: NgForm;
-  @ViewChild('companyForm') companyForm!: NgForm;
-  @ViewChild('bankingForm') bankingForm!: NgForm;
+  @ViewChild(BasicDetailsComponent) basicForm!: BasicDetailsComponent;
+  @ViewChild(CompanyContactComponent) companyForm!: CompanyContactComponent;
+  @ViewChild(BankingInformationComponent) bankingForm!: BankingInformationComponent;
 
   isTabValid: { [key in VendorCompositeModelKey]: boolean } = {
     vendor: false,
