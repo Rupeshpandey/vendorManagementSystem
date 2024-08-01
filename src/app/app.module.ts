@@ -14,6 +14,8 @@ import { BasicDetailsComponent } from './component/basic-details/basic-details.c
 import { CompanyContactComponent } from './component/company-contact/company-contact.component';
 import { BankingInformationComponent } from './component/banking-information/banking-information.component';
 import { LoginComponent } from './component/login/login.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { LoginComponent } from './component/login/login.component';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
