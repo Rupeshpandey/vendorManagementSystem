@@ -10,7 +10,7 @@ import { VendorCompositeModel } from 'src/app/models/vendor-composite.model';
 })
 export class VendorListComponent implements OnInit {
   vendors: VendorCompositeModel[] = [];
-  displayedColumns: string[] = ['vendorID', 'companyName', 'contactEmail', 'bankName'];
+  displayedColumns: string[] = ['vendorID',  'companyName', 'contactEmail', 'bankName'];
 
   constructor(private vendorService: VendorService, private router: Router) { }
 
