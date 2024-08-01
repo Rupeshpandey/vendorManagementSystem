@@ -18,6 +18,11 @@
         <td mat-cell *matCellDef="let vendor"> {{vendor.vendor.vendorID}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let vendor"> {{vendor.vendor.firstName}} </td>
+      </ng-container>
+
       
 
       
