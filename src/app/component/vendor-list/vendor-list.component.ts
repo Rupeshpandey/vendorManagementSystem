@@ -42,7 +42,7 @@ export class VendorListComponent implements OnInit {
         this.vendorService.deleteVendor(id).subscribe(
           () => {
             Swal.fire('Deleted!', 'The vendor has been deleted.', 'success');
-            this.loadVendors(); // Refresh the list
+            this.loadVendors();
           },
           error => Swal.fire('Error!', 'Failed to delete the vendor.', 'error')
         );

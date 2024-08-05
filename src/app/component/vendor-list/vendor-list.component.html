@@ -12,7 +12,6 @@
 
   <div class="content mt-4">
     <mat-table [dataSource]="vendors" class="mat-elevation-z8">
-      <!-- Define columns here -->
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
         <mat-cell *matCellDef="let vendor"> {{vendor.vendor.firstName}} {{vendor.vendor.lastName}} </mat-cell>

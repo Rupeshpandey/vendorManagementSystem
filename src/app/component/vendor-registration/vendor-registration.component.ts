@@ -82,7 +82,7 @@ export class VendorRegistrationComponent {
 
   resetFormData() {
     console.log('Before reset: ', this.formData);
-    this.formData = this.initializeFormData(); // Reset data model
+    this.formData = this.initializeFormData();
     console.log('After reset: ', this.formData);
     this.isTabValid = {
         vendor: false,
