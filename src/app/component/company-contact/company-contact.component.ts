@@ -76,21 +76,7 @@ export class CompanyContactComponent {
     this.companyForm.resetForm(this.companyContact);
     this.formValid.emit({ valid: false, data: this.companyContact });
   }
-
-  // resetForm() {
-  //     this.companyForm.resetForm();
-  //     this.formValid.emit({ valid: false, data: this.companyContact });
-    
-  // }
-  
-
-  
-
-
   onTabChange(event: any): void {
     console.log('Tab changed to', event.index);
   }
-
-  
-
 }

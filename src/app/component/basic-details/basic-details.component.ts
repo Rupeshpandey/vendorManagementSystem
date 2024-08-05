@@ -55,12 +55,11 @@ export class BasicDetailsComponent {
   loadDistricts() {
     this.districtsService.getDistricts().subscribe(
       (data: any[]) => {
-        this.districts = data.map(district => district.district_Name); // Map to district_Name from API response
+        this.districts = data.map(district => district.district_Name);
         console.log('Districts:', this.districts);  
       },
       (error) => {
         console.error('Error loading districts', error);
-        // Handle error (e.g., show error message to user)
       }
     );
   }
@@ -73,7 +72,7 @@ export class BasicDetailsComponent {
       },
       (error) => {
         console.error('Error loading blocks', error);
-        // Handle error (e.g., show error message to user)
+        
       }
     );
   }
@@ -141,10 +140,5 @@ export class BasicDetailsComponent {
     this.basicForm.resetForm(this.vendor);
     this.formValid.emit({ valid: false, data: this.vendor });
   }
-
-  // resetForm() {
-  //   this.basicForm.resetForm();
-  //   this.formValid.emit({ valid: false, data: this.vendor });
-  //   }
   
 }

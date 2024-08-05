@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatTabGroup } from '@angular/material/tabs';
 import { VendorService } from 'src/app/services/vendor.service';
 import { VendorCompositeModel } from 'src/app/models/vendor-composite.model';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
 import { BasicDetailsComponent } from '../basic-details/basic-details.component';
 import { CompanyContactComponent } from '../company-contact/company-contact.component';
 import { BankingInformationComponent } from '../banking-information/banking-information.component';
@@ -16,7 +15,7 @@ type VendorCompositeModelKey = keyof VendorCompositeModel;
   templateUrl: './vendor-registration.component.html',
   styleUrls: ['./vendor-registration.component.css']
 })
-export class VendorRegistrationComponent implements OnInit {
+export class VendorRegistrationComponent {
 
   @ViewChild('tabGroup') tabGroup!: MatTabGroup;
   @ViewChild(BasicDetailsComponent) basicForm!: BasicDetailsComponent;
@@ -34,7 +33,7 @@ export class VendorRegistrationComponent implements OnInit {
 
   constructor(private vendorService: VendorService, private router: Router) {}
 
-  ngOnInit(): void { }
+
 
   onFormValid(tab: VendorCompositeModelKey, event: { valid: boolean; data: any }) {
     this.isTabValid[tab] = event.valid;
@@ -92,32 +91,16 @@ export class VendorRegistrationComponent implements OnInit {
     };
     this.navigateToTab(0);
 }
-ngAfterViewInit() {
-  console.log('Basic form:', this.basicForm);
-  console.log('Company form:', this.companyForm);
-  console.log('Banking form:', this.bankingForm);
-  }
 
 resetAllForms() {
-    debugger;
-    console.log('Resetting forms...');
-    console.log('Basic form:', this.basicForm);
-    console.log('Company form:', this.companyForm);
-    console.log('Banking form:', this.bankingForm);
     if (this.basicForm) {
-        console.log('Basic form before reset:', this.basicForm);
         this.basicForm.resetForm();
-        console.log('Basic form after reset:', this.basicForm);
     }
     if (this.companyForm) {
-        console.log('Company form before reset:', this.companyForm);
         this.companyForm.resetForm();
-        console.log('Company form after reset:', this.companyForm);
     }
     if (this.bankingForm) {
-        console.log('Banking form before reset:', this.bankingForm);
         this.bankingForm.resetForm();
-        console.log('Banking form after reset:', this.bankingForm);
     }
     
     this.resetFormData();
