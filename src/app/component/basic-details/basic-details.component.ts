@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { PanverificationService } from 'src/app/services/panverification.service';
 import { DistrictsService } from 'src/app/services/districts.service';
 import { BlocksService } from 'src/app/services/blocks.service';
+import { VendorCompositeModel } from 'src/app/models/vendor-composite.model';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -18,14 +19,14 @@ export class BasicDetailsComponent {
   @Input() parentComponent: any;
   
 
-  vendor = {
+  vendor: VendorCompositeModel['vendor'] = {
     vendorID: 1,
     firstName: '',
     middleName: '',
     lastName: '',
     gender: '',
     mobile: '',
-    dob: '',
+    dob: new Date(),
     panCard: '',
     profileImage: '',
     languagePreference: {
@@ -55,11 +56,12 @@ export class BasicDetailsComponent {
   loadDistricts() {
     this.districtsService.getDistricts().subscribe(
       (data: any[]) => {
-        this.districts = data.map(district => district.district_Name);
+        this.districts = data.map(district => district.district_Name); // Map to district_Name from API response
         console.log('Districts:', this.districts);  
       },
       (error) => {
         console.error('Error loading districts', error);
+        // Handle error (e.g., show error message to user)
       }
     );
   }
@@ -72,7 +74,7 @@ export class BasicDetailsComponent {
       },
       (error) => {
         console.error('Error loading blocks', error);
-        
+        // Handle error (e.g., show error message to user)
       }
     );
   }
@@ -125,7 +127,7 @@ export class BasicDetailsComponent {
       lastName: '',
       gender: '',
       mobile: '',
-      dob: '',
+      dob: new Date(),
       panCard: '',
       profileImage: '',
       languagePreference: {
@@ -140,5 +142,14 @@ export class BasicDetailsComponent {
     this.basicForm.resetForm(this.vendor);
     this.formValid.emit({ valid: false, data: this.vendor });
   }
+  setData(data: VendorCompositeModel['vendor']) {
+    this.vendor = data;
+    this.basicForm.resetForm(this.vendor);
+  }
+
+  // resetForm() {
+  //   this.basicForm.resetForm();
+  //   this.formValid.emit({ valid: false, data: this.vendor });
+  //   }
   
 }

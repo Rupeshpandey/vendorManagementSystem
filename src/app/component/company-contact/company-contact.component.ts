@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter, ViewChild, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { VendorCompositeModel } from 'src/app/models/vendor-composite.model';
 
 @Component({
   selector: 'app-company-contact',
@@ -13,7 +14,7 @@ export class CompanyContactComponent {
   @ViewChild('companyForm') companyForm!: NgForm;
   @Input() parentComponent: any;
 
-  companyContact = {
+  companyContact: VendorCompositeModel['companyContact'] = {
     vendorID: 0,
     companyName: '',
     telephone: '',
@@ -78,5 +79,9 @@ export class CompanyContactComponent {
   }
   onTabChange(event: any): void {
     console.log('Tab changed to', event.index);
+  }
+  setData(data: VendorCompositeModel['companyContact']) {
+    this.companyContact = data;
+    this.companyForm.resetForm(this.companyContact);
   }
 }

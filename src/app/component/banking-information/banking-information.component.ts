@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter, ViewChild, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { VendorCompositeModel } from 'src/app/models/vendor-composite.model';
 
 @Component({
   selector: 'app-banking-information',
@@ -13,7 +14,7 @@ export class BankingInformationComponent {
   @ViewChild('bankingForm') bankingForm!: NgForm;
   @Input() parentComponent: any;
 
-  bankingInformation = {
+  bankingInformation: VendorCompositeModel['bankingInformation'] = {
     vendorID: 0,
     bankName: '',
     IFSCCode: '',
@@ -59,5 +60,9 @@ export class BankingInformationComponent {
     };
     this.bankingForm.resetForm(this.bankingInformation);
     this.formValid.emit({ valid: false, data: this.bankingInformation });
+  }
+  setData(data: VendorCompositeModel['bankingInformation']) {
+    this.bankingInformation = data;
+    this.bankingForm.resetForm(this.bankingInformation);
   }
 }

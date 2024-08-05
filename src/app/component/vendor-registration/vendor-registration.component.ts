@@ -1,9 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatTabGroup } from '@angular/material/tabs';
 import { VendorService } from 'src/app/services/vendor.service';
 import { VendorCompositeModel } from 'src/app/models/vendor-composite.model';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { BasicDetailsComponent } from '../basic-details/basic-details.component';
 import { CompanyContactComponent } from '../company-contact/company-contact.component';
 import { BankingInformationComponent } from '../banking-information/banking-information.component';
@@ -15,7 +15,7 @@ type VendorCompositeModelKey = keyof VendorCompositeModel;
   templateUrl: './vendor-registration.component.html',
   styleUrls: ['./vendor-registration.component.css']
 })
-export class VendorRegistrationComponent {
+export class VendorRegistrationComponent implements OnInit {
 
   @ViewChild('tabGroup') tabGroup!: MatTabGroup;
   @ViewChild(BasicDetailsComponent) basicForm!: BasicDetailsComponent;
@@ -27,19 +27,43 @@ export class VendorRegistrationComponent {
     companyContact: false,
     bankingInformation: false
   };
-  
+
 
   formData: VendorCompositeModel = this.initializeFormData();
+  vendorId: number = 0;
 
-  constructor(private vendorService: VendorService, private router: Router) {}
+  constructor(private vendorService: VendorService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
 
-
+              ngOnInit(): void {
+                this.route.paramMap.subscribe(params => {
+                  const id = Number(params.get('id'));
+                  if (id) {
+                    this.vendorId = id;
+                    this.loadVendorData(id);
+                  }
+                });
+              }
+              loadVendorData(id: number) {
+                this.vendorService.getVendor(id).subscribe(
+                  data => {
+                    this.formData = data;
+                    
+                    // Assume forms are set up properly with data binding
+                    if (this.basicForm) this.basicForm.setData(data.vendor);
+                    if (this.companyForm) this.companyForm.setData(data.companyContact);
+                    if (this.bankingForm) this.bankingForm.setData(data.bankingInformation);
+                  },
+                  error => console.error('Error loading vendor data', error)
+                );
+              }
   onFormValid(tab: VendorCompositeModelKey, event: { valid: boolean; data: any }) {
     this.isTabValid[tab] = event.valid;
     this.formData[tab] = event.data;
     if (event.valid && tab !== 'bankingInformation') {
-      this.continue(); 
+      this.continue();
     }
   }
 
@@ -82,29 +106,34 @@ export class VendorRegistrationComponent {
 
   resetFormData() {
     console.log('Before reset: ', this.formData);
-    this.formData = this.initializeFormData();
+    this.formData = this.initializeFormData(); // Reset data model
     console.log('After reset: ', this.formData);
     this.isTabValid = {
-        vendor: false,
-        companyContact: false,
-        bankingInformation: false
+      vendor: false,
+      companyContact: false,
+      bankingInformation: false
     };
     this.navigateToTab(0);
-}
+  }
 
-resetAllForms() {
+  resetAllForms() {
     if (this.basicForm) {
-        this.basicForm.resetForm();
+      this.basicForm.resetForm();
+
     }
     if (this.companyForm) {
-        this.companyForm.resetForm();
+      console.log('Company form before reset:', this.companyForm);
+      this.companyForm.resetForm();
+      console.log('Company form after reset:', this.companyForm);
     }
     if (this.bankingForm) {
-        this.bankingForm.resetForm();
+      console.log('Banking form before reset:', this.bankingForm);
+      this.bankingForm.resetForm();
+      console.log('Banking form after reset:', this.bankingForm);
     }
-    
+
     this.resetFormData();
-}
+  }
 
   initializeFormData(): VendorCompositeModel {
     return {
@@ -152,7 +181,7 @@ resetAllForms() {
         createdAt: new Date(),
         updatedAt: new Date()
       }
-    }; 
+    };
   }
 
   highlightInvalidForms() {
@@ -176,5 +205,5 @@ resetAllForms() {
     this.router.navigate(['/vendor-list']);
   }
 
-  
+
 }
