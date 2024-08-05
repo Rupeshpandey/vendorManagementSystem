@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { VendorService } from 'src/app/services/vendor.service';
 import { VendorCompositeModel } from 'src/app/models/vendor-composite.model';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vendor-list',
@@ -10,26 +11,42 @@ import { VendorCompositeModel } from 'src/app/models/vendor-composite.model';
 })
 export class VendorListComponent implements OnInit {
   vendors: VendorCompositeModel[] = [];
-  displayedColumns: string[] = ['vendorID', 'firstName',  'companyName', 'contactEmail', 'bankName'];
 
   constructor(private vendorService: VendorService, private router: Router) { }
 
   ngOnInit(): void {
-    this.fetchVendors();
+    this.loadVendors();
   }
 
-  fetchVendors(): void {
+  loadVendors() {
     this.vendorService.getVendors().subscribe(
-      (data: VendorCompositeModel[]) => {
-        this.vendors = data;
-      },
-      error => {
-        console.error('Error fetching vendors:', error);
-      }
+      vendors => this.vendors = vendors,
+      error => console.error('Error loading vendors', error)
     );
   }
 
-  navigateToVendorRegistration(): void {
-    this.router.navigate(['/vendor-registration']);
+  editVendor(id: number) {
+    this.router.navigate(['/vendor-registration', id]);
+  }
+
+  deleteVendor(id: number) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this vendor!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.vendorService.deleteVendor(id).subscribe(
+          () => {
+            Swal.fire('Deleted!', 'The vendor has been deleted.', 'success');
+            this.loadVendors(); // Refresh the list
+          },
+          error => Swal.fire('Error!', 'Failed to delete the vendor.', 'error')
+        );
+      }
+    });
   }
 }

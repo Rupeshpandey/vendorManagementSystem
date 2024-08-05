@@ -5,10 +5,11 @@ import { VendorListComponent } from './component/vendor-list/vendor-list.compone
 import { LoginComponent } from './component/login/login.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'vendor-registration/:id', component: VendorRegistrationComponent },
   { path: 'vendor-registration', component: VendorRegistrationComponent },
-  { path: 'vendor-list', component: VendorListComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' } // Default route to login page
+  { path: 'vendor-list', component: VendorListComponent }
 ];
 
 @NgModule({
