@@ -51,6 +51,9 @@ export class BasicDetailsComponent {
   ngOnInit() {
     this.formValid.emit({ valid: false, data: this.vendor });
     this.loadDistricts();
+    if (this.vendor.district) {
+      this.loadBlocks(Number(this.vendor.district));
+    }
   }
 
   loadDistricts() {

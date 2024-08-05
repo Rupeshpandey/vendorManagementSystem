@@ -108,6 +108,8 @@
         <label class="w-100">Upload Profile Image</label>
         <input type="file" class="form-control" name="file" #file="ngModel" [(ngModel)]="vendor.profileImage" required (change)="onFileChange($event)">
         <mat-error *ngIf="!fileValid">
+          <img *ngIf="vendor.profileImage" [src]="vendor.profileImage" alt="Profile Image" />
+
           <span>Kindly upload a Profile Image.</span>
         </mat-error>
       </div>
