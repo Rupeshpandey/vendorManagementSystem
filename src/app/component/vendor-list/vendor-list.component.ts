@@ -26,7 +26,7 @@ export class VendorListComponent implements OnInit {
   }
 
   editVendor(id: number) {
-    this.router.navigate(['/vendor-registration', id]);
+    this.router.navigate(['/vendor-registration', id, { mode: 'edit' }]);
   }
 
   deleteVendor(id: number) {

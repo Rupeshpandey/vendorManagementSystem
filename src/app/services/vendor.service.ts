@@ -25,6 +25,7 @@ export class VendorService {
         catchError(this.handleError)
       );
   }
+  
 
   deleteVendor(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`)

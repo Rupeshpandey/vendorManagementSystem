@@ -27,7 +27,7 @@
     <div class="text-center mt-4">
       <button mat-raised-button color="primary" (click)="submitForm()"
         [disabled]="!isTabValid['vendor'] || !isTabValid['companyContact']">
-        Submit
+        {{ mode === 'edit' ? 'Update' : 'Submit' }}
       </button>
     </div>
   </div>

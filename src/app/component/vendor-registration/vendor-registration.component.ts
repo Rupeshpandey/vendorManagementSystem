@@ -31,34 +31,36 @@ export class VendorRegistrationComponent implements OnInit {
 
   formData: VendorCompositeModel = this.initializeFormData();
   vendorId: number = 0;
+  mode: string = 'add';
 
   constructor(private vendorService: VendorService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+    private router: Router,
+    private route: ActivatedRoute) { }
 
 
-              ngOnInit(): void {
-                this.route.paramMap.subscribe(params => {
-                  const id = Number(params.get('id'));
-                  if (id) {
-                    this.vendorId = id;
-                    this.loadVendorData(id);
-                  }
-                });
-              }
-              loadVendorData(id: number) {
-                this.vendorService.getVendor(id).subscribe(
-                  data => {
-                    this.formData = data;
-                    
-                    // Assume forms are set up properly with data binding
-                    if (this.basicForm) this.basicForm.setData(data.vendor);
-                    if (this.companyForm) this.companyForm.setData(data.companyContact);
-                    if (this.bankingForm) this.bankingForm.setData(data.bankingInformation);
-                  },
-                  error => console.error('Error loading vendor data', error)
-                );
-              }
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      const id = +params.get('id')!;
+      this.mode = params.get('mode') || 'add';
+
+      if (this.mode === 'edit' && id) {
+        this.loadVendorData(id);
+      }
+    });
+  }
+  loadVendorData(id: number) {
+    this.vendorService.getVendor(id).subscribe(
+      data => {
+        this.formData = data;
+
+        // Assume forms are set up properly with data binding
+        if (this.basicForm) this.basicForm.setData(data.vendor);
+        if (this.companyForm) this.companyForm.setData(data.companyContact);
+        if (this.bankingForm) this.bankingForm.setData(data.bankingInformation);
+      },
+      error => console.error('Error loading vendor data', error)
+    );
+  }
   onFormValid(tab: VendorCompositeModelKey, event: { valid: boolean; data: any }) {
     this.isTabValid[tab] = event.valid;
     this.formData[tab] = event.data;
@@ -84,25 +86,47 @@ export class VendorRegistrationComponent implements OnInit {
     }
   }
 
+  // submitForm() {
+  //   this.vendorService.insertVendor(this.formData).subscribe(
+  //     response => {
+  //       Swal.fire({
+  //         icon: 'success',
+  //         title: 'Success',
+  //         text: 'Vendor registration successful!',
+  //       });
+  //       this.resetAllForms();
+  //     },
+  //     error => {
+  //       Swal.fire({
+  //         icon: 'error',
+  //         title: 'Error',
+  //         text: 'Vendor registration failed. Please try again.',
+  //       });
+  //     }
+  //   );
+  // }
+
   submitForm() {
-    this.vendorService.insertVendor(this.formData).subscribe(
-      response => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          text: 'Vendor registration successful!',
-        });
-        this.resetAllForms();
-      },
-      error => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Vendor registration failed. Please try again.',
-        });
-      }
-    );
+    if (this.mode === 'edit') {
+      this.vendorService.updateVendor(this.vendorId, this.formData).subscribe(
+        () => {
+          Swal.fire('Updated!', 'The vendor has been updated.', 'success');
+          this.router.navigate(['/vendor-list']);
+        },
+        error => Swal.fire('Error!', 'Failed to update the vendor.', 'error')
+      );
+    } else {
+      this.vendorService.insertVendor(this.formData).subscribe(
+        () => {
+          Swal.fire('Added!', 'The vendor has been added.', 'success');
+          this.resetAllForms();
+          this.router.navigate(['/vendor-list']);
+        },
+        error => Swal.fire('Error!', 'Failed to add the vendor.', 'error')
+      );
+    }
   }
+
 
   resetFormData() {
     console.log('Before reset: ', this.formData);
