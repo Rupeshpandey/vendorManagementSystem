@@ -52,8 +52,6 @@ export class VendorRegistrationComponent implements OnInit {
     this.vendorService.getVendor(id).subscribe(
       data => {
         this.formData = data;
-
-        // Assume forms are set up properly with data binding
         if (this.basicForm) this.basicForm.setData(data.vendor);
         if (this.companyForm) this.companyForm.setData(data.companyContact);
         if (this.bankingForm) this.bankingForm.setData(data.bankingInformation);
@@ -86,26 +84,6 @@ export class VendorRegistrationComponent implements OnInit {
     }
   }
 
-  // submitForm() {
-  //   this.vendorService.insertVendor(this.formData).subscribe(
-  //     response => {
-  //       Swal.fire({
-  //         icon: 'success',
-  //         title: 'Success',
-  //         text: 'Vendor registration successful!',
-  //       });
-  //       this.resetAllForms();
-  //     },
-  //     error => {
-  //       Swal.fire({
-  //         icon: 'error',
-  //         title: 'Error',
-  //         text: 'Vendor registration failed. Please try again.',
-  //       });
-  //     }
-  //   );
-  // }
-
   submitForm() {
     if (this.mode === 'edit') {
       this.vendorService.updateVendor(this.vendorId, this.formData).subscribe(
@@ -131,7 +109,7 @@ export class VendorRegistrationComponent implements OnInit {
 
   resetFormData() {
     console.log('Before reset: ', this.formData);
-    this.formData = this.initializeFormData(); // Reset data model
+    this.formData = this.initializeFormData(); 
     console.log('After reset: ', this.formData);
     this.isTabValid = {
       vendor: false,
