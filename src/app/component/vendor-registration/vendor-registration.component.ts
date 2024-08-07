@@ -108,14 +108,20 @@ export class VendorRegistrationComponent implements OnInit {
   }
 
   submitForm() {
+    console.log('Submitting form with payload:', this.formData);
     if (this.mode === 'edit') {
+      console.log(this.formData);
       this.vendorService.updateVendor(this.vendorId, this.formData).subscribe(
         () => {
           Swal.fire('Updated!', 'The vendor has been updated.', 'success');
           this.resetAllForms();
           this.router.navigate(['/vendor-list']);
         },
-        error => Swal.fire('Error!', 'Failed to update the vendor.', 'error')
+        
+        error => {
+          console.error('Error updating vendor:', error);
+          Swal.fire('Error!', 'Failed to update the vendor.', 'error');
+        }
       );
     } else {
       this.vendorService.insertVendor(this.formData).subscribe(
