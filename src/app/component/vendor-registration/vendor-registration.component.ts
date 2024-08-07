@@ -53,6 +53,14 @@ export class VendorRegistrationComponent implements OnInit {
     this.vendorService.getVendor(id).subscribe(
       data => {
         console.log('Loaded vendor data:', data); // Log the entire data object
+         // Inspect specific fields here
+      console.log('Vendor Mobile:', data.vendor.mobile);
+      console.log('Vendor Block:', data.vendor.block);
+      console.log('Vendor Profile Image:', data.vendor.profileImage);
+      console.log('Vendor Address:', data.companyContact.mailingAddress);
+      console.log('Vendor Branch Name:', data.bankingInformation.Branch);
+      
+      // Rest of the existing code...
   
         this.formData = data;
         console.log('Form data set:', this.formData); // Log the formData object
