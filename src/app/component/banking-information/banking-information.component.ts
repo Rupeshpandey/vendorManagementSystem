@@ -38,9 +38,6 @@ export class BankingInformationComponent {
     this.checkFormValidity();
   }
   
-
-  
-
   continue() {
     this.checkFormValidity();
     if (this.bankingForm.valid) {
