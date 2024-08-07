@@ -46,19 +46,34 @@ export class VendorRegistrationComponent implements OnInit {
       if (this.mode === 'edit' && id) {
         this.loadVendorData(id);
       }
+      
     });
   }
   loadVendorData(id: number) {
     this.vendorService.getVendor(id).subscribe(
       data => {
+        console.log('Loaded vendor data:', data); // Log the entire data object
+  
         this.formData = data;
-        if (this.basicForm) this.basicForm.setData(data.vendor);
-        if (this.companyForm) this.companyForm.setData(data.companyContact);
-        if (this.bankingForm) this.bankingForm.setData(data.bankingInformation);
+        console.log('Form data set:', this.formData); // Log the formData object
+  
+        if (this.basicForm) {
+          this.basicForm.setData(data.vendor);
+          console.log('Basic form data set:', data.vendor); // Log data passed to basicForm
+        }
+        if (this.companyForm) {
+          this.companyForm.setData(data.companyContact);
+          console.log('Company contact form data set:', data.companyContact); // Log data passed to companyForm
+        }
+        if (this.bankingForm) {
+          this.bankingForm.setData(data.bankingInformation);
+          console.log('Banking information form data set:', data.bankingInformation); // Log data passed to bankingForm
+        }
       },
       error => console.error('Error loading vendor data', error)
     );
   }
+  
   onFormValid(tab: VendorCompositeModelKey, event: { valid: boolean; data: any }) {
     this.isTabValid[tab] = event.valid;
     this.formData[tab] = event.data;

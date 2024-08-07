@@ -49,4 +49,8 @@ export class VendorListComponent implements OnInit {
       }
     });
   }
+
+  vendorregistration() {
+    this.router.navigate(['/vendor-registration']);
+  }
 }
