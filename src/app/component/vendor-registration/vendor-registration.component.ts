@@ -111,6 +111,7 @@ export class VendorRegistrationComponent implements OnInit {
       this.vendorService.updateVendor(this.vendorId, this.formData).subscribe(
         () => {
           Swal.fire('Updated!', 'The vendor has been updated.', 'success');
+          this.resetAllForms();
           this.router.navigate(['/vendor-list']);
         },
         error => Swal.fire('Error!', 'Failed to update the vendor.', 'error')
