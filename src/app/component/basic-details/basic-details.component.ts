@@ -143,9 +143,12 @@ export class BasicDetailsComponent {
     this.basicForm.resetForm(this.vendor);
     this.formValid.emit({ valid: false, data: this.vendor });
   }
-  setData(data: VendorCompositeModel['vendor']) {
+  setData(data: any) {
+
+    console.log(data)
+    this.vendor.mobile = data.mobile
     this.vendor = data;
-    this.basicForm.resetForm(this.vendor);
+    // this.basicForm.resetForm(this.vendor);
   }
 
   

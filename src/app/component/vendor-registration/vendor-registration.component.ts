@@ -66,6 +66,7 @@ export class VendorRegistrationComponent implements OnInit {
         console.log('Form data set:', this.formData); // Log the formData object
   
         if (this.basicForm) {
+          
           this.basicForm.setData(data.vendor);
           console.log('Basic form data set:', data.vendor); // Log data passed to basicForm
         }
