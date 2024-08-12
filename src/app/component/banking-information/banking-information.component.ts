@@ -60,6 +60,7 @@ export class BankingInformationComponent {
   }
   setData(data: VendorCompositeModel['bankingInformation']) {
     this.bankingInformation = data;
-    this.bankingForm.resetForm(this.bankingInformation);
+    this.bankingInformation.Branch = data.Branch
+    //this.bankingForm.resetForm(this.bankingInformation);
   }
 }

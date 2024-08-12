@@ -82,6 +82,7 @@ export class CompanyContactComponent {
   }
   setData(data: VendorCompositeModel['companyContact']) {
     this.companyContact = data;
-    this.companyForm.resetForm(this.companyContact);
+    this.companyContact.mailingAddress = data.mailingAddress
+    //this.companyForm.resetForm(this.companyContact);
   }
 }
