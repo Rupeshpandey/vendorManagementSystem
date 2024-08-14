@@ -148,7 +148,7 @@ export class BasicDetailsComponent {
     console.log(data)
     this.vendor.mobile = data.mobile
     this.vendor.block = data.block
-    this.vendor.profileImage = data.profileImage
+    this.vendor.profileImage = ''
     this.vendor = data;
      //this.basicForm.resetForm(this.vendor);
   }
