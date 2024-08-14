@@ -52,31 +52,29 @@ export class VendorRegistrationComponent implements OnInit {
   loadVendorData(id: number) {
     this.vendorService.getVendor(id).subscribe(
       data => {
-        console.log('Loaded vendor data:', data); // Log the entire data object
-         // Inspect specific fields here
+        console.log('Loaded vendor data:', data);
       console.log('Vendor Mobile:', data.vendor.mobile);
       console.log('Vendor Block:', data.vendor.block);
       console.log('Vendor Profile Image:', data.vendor.profileImage);
       console.log('Vendor Address:', data.companyContact.mailingAddress);
       console.log('Vendor Branch Name:', data.bankingInformation.Branch);
       
-      // Rest of the existing code...
   
         this.formData = data;
-        console.log('Form data set:', this.formData); // Log the formData object
+        console.log('Form data set:', this.formData); 
   
         if (this.basicForm) {
           
           this.basicForm.setData(data.vendor);
-          console.log('Basic form data set:', data.vendor); // Log data passed to basicForm
+          console.log('Basic form data set:', data.vendor);
         }
         if (this.companyForm) {
           this.companyForm.setData(data.companyContact);
-          console.log('Company contact form data set:', data.companyContact); // Log data passed to companyForm
+          console.log('Company contact form data set:', data.companyContact);
         }
         if (this.bankingForm) {
           this.bankingForm.setData(data.bankingInformation);
-          console.log('Banking information form data set:', data.bankingInformation); // Log data passed to bankingForm
+          console.log('Banking information form data set:', data.bankingInformation);
         }
       },
       error => console.error('Error loading vendor data', error)
